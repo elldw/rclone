@@ -3221,7 +3221,8 @@ func setQuirks(opt *Options) {
 		// Google break request Signature by mutating accept-encoding HTTP header
 		// https://github.com/rclone/rclone/issues/6670
 		useAcceptEncodingGzip = false
-		useAlreadyExists = true // returns BucketNameUnavailable instead of BucketAlreadyExists but good enough!
+		useAlreadyExists = true        // returns BucketNameUnavailable instead of BucketAlreadyExists but good enough!
+		opt.CopyCutoff = math.MaxInt64 // UploadPartCopy is not implemented
 	default:
 		fs.Logf("s3", "s3 provider %q not known - please set correctly", opt.Provider)
 		fallthrough
